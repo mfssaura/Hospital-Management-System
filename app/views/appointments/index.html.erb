@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .div-table {
+    	display: table;
+    	width: 85%;
+    	background-color: #eee;
+    	border: 1px solid #666666;
+    	border-spacing: 5px;
+    }
+    .tr {
+      display: table-row;
+    }
+    .tc {
+    	display:table-cell;
+    	vertical-align:top;
+    	background-color: #ccc;
+    	padding: 5px 10px;
+    }
+  </style>
+</head>
+<h2>Appointments List</h2>
+
+<% if current_user && (current_user.role == 0) %>
+
+    <div class="create-container">
+      <%= link_to "Create New Appointment", new_appointment_path  %>
+    </div>
+    <div class="div-table">
+        <div class="tr">
+          <div class="tc">Date</div>
+          <div class="tc">Doctor</div>
+          <div class="tc">Status</div>
+          <div class="tc">Show</div>
+          <div class="tc">Edit</div>
+          <div class="tc">Delete</div>
+        </div>
+        <div class="tr">
+          <% @pat_app.each do |patient_apps| %>
+            <div class="tc"> <%= patient_apps.created_at %></div>
+            <div class="tc"> <%= patient_apps.first_name  %> <%= patient_apps.last_name %></div>
+            <div class="tc"> <%= %></div>
+            <div class="tc"> <%= link_to "Show", '#' %></div>
+            <div class="tc"><%= link_to "Edit", '#' %></div>
+            <div class="tc"><%= link_to "Delete", '#' %></div>
+          <% end %>
+        </div>
+      </div>
+<% end %>

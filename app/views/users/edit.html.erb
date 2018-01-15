@@ -1,0 +1,13 @@
+<%= form_for(@user) do |f| %>
+
+  <div class="field">
+    <%= f.label :cover %>
+    <%= f.file_field :cover %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+
+<% end %>

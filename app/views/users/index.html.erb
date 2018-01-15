@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .div-table {
+    	display: table;
+    	width: 85%;
+    	background-color: #eee;
+    	border: 1px solid #666666;
+    	border-spacing: 5px;
+    }
+    .tr {
+      display: table-row;
+    }
+    .tc {
+    	display:table-cell;
+    	vertical-align:top;
+    	background-color: #ccc;
+    	padding: 5px 10px;
+    }
+  </style>
+</head>
+<h1>Hospital Management System</h1>
+
+
+<!-- if logged in as doctor -->
+<% if current_user && (current_user.role == 1) %>
+
+
+
+  <div class="div-table">
+      <div class="tr">
+        <div class="tc">Date</div>
+        <div class="tc">Patient</div>
+        <div class="tc">Status</div>
+        <div class="tc">Show</div>
+        <div class="tc">Edit</div>
+        <div class="tc">Delete</div>
+      </div>
+      <div class="tr">
+        <%= @patient_users.each do |patient| %>
+          <div class="tc"> <%= patient.created_at %></div>
+          <div class="tc"> <%= patient.first_name %></div>
+          <div class="tc"></div>
+          <div class="tc"> <%= link_to "Show", '#' %></div>
+          <div class="tc"><%= link_to "Edit", '#' %></div>
+          <div class="tc"><%= link_to "Delete", '#' %></div>
+
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if current_user && (current_user.role == 0) %>
+
+  <div class="image-container">
+    <%= image_tag(current_user.cover.url) if current_user.cover? %>
+  </div>
+
+    <div class="create-container">
+      <%= link_to "Create New Appointment", new_appointment_path  %>
+    </div>
+    <div class="div-table">
+        <div class="tr">
+          <div class="tc">Date</div>
+          <div class="tc">Doctor</div>
+          <div class="tc">Status</div>
+          <div class="tc">Show</div>
+          <div class="tc">Edit</div>
+          <div class="tc">Delete</div>
+        </div>
+        <div class="tr">
+          <%= @doctor_users.each do |doctor| %>
+            <div class="tc"> <%= doctor.created_at %></div>
+            <div class="tc"> <%= doctor.first_name  %> <%= doctor.last_name %></div>
+            <div class="tc"> <%= %></div>
+            <div class="tc"> <%= link_to "Show", '#' %></div>
+            <div class="tc"><%= link_to "Edit", '#' %></div>
+            <div class="tc"><%= link_to "Delete", '#' %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </html>

@@ -13,7 +13,7 @@ class CoverUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  #process resize_to_fill: [200, 0]
+  process resize_to_fill: [200, 200]
   #version :resized do
     # returns an image with a maximum width of 100px
     # while maintaining the aspect ratio

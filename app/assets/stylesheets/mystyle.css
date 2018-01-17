@@ -1,0 +1,21 @@
+// Place all the styles related to the appointments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+<style>
+  .div-table {
+    display: table;
+    width: 85%;
+    background-color: #eee;
+    border: 1px solid #666666;
+    border-spacing: 5px;
+  }
+  .tr {
+    display: table-row;
+  }
+  .tc {
+    display:table-cell;
+    vertical-align:top;
+    background-color: #ccc;
+    padding: 5px 10px;
+  }
+</style>

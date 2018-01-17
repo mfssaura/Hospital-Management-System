@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def index
     #@users = User.all
-    @patient_users = User.joins(:doctor_appointments)
+    @patient_users = User.find_by_sql('SELECT appointments.status, appointments.created_at, appointments.patient_id, appointments.doctor_id, users.first_name, users.last_name
+                                      FROM users
+                                      INNER JOIN appointments
+                                      ON users.id = appointments.patient_id')
 
-    @doctor_users = User.joins(:patient_appointments)
+    @doctor_users = User.find_by_sql('SELECT appointments.status, appointments.created_at, appointments.patient_id, appointments.doctor_id, users.first_name, users.last_name
+                                      FROM users
+                                      INNER JOIN appointments
+                                      ON users.id = appointments.doctor_id')
   end
 
   def show

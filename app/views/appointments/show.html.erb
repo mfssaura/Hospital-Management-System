@@ -1,0 +1,27 @@
+<div class="field">
+  <div><h3>Appointment Date: </h3>
+    <%= @appointment.date.to_formatted_s(:long) %>
+  </div>
+</div>
+
+<div class="field">
+  <div><h3>Appointment Status: </h3>
+    <%= @appointment.status %>
+  </div>
+</div>
+
+<div class="field">
+  <h3>My Notes:</h3>
+  <% @my_notes.each do |n| %>
+    <div class="field">
+      <div><h5>Description: </h5>
+        <%= n.description %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+
+<div class="button">
+    <%= link_to "Back to home", appointments_path %>
+</div>

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+
   def index
     @notes = Note.all
   end
@@ -19,9 +20,25 @@ class NotesController < ApplicationController
     end
   end
 
-  private
+  def edit
+    @appointment = Appointment.find(params[:id])
+    @note = @appointment.notes.last
+  end
 
+  def show
+    @appointment = Appointment.find(params[:id])
+    @my_notes = Note.where('user_id = ?', current_user.id)
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
     def notes_params
-      params.require(:notes).permit(:description, :appointment_id, :user_id)
+      params.require(:note).permit(:description)
     end
+
 end

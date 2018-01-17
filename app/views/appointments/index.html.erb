@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <head>
-  <style>
-    .div-table {
-    	display: table;
-    	width: 85%;
-    	background-color: #eee;
-    	border: 1px solid #666666;
-    	border-spacing: 5px;
-    }
-    .tr {
-      display: table-row;
-    }
-    .tc {
-    	display:table-cell;
-    	vertical-align:top;
-    	background-color: #ccc;
-    	padding: 5px 10px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <h2>Appointments List</h2>
 
-<% if current_user && (current_user.role == 0) %>
 
-    <div class="create-container">
-      <%= link_to "Create New Appointment", new_appointment_path  %>
+    <div class="image-container">
+      <%= image_tag(current_user.cover.url) if current_user.cover? %>
     </div>
+
+
+    <div class="field">
+      <h4>Logged In As:</h4>
+      <%= current_user.first_name %>
+    </div>
+
+    <div class="field">
+      <h4>e-mail</h4>
+      <%= current_user.email %>
+    </div>
+
+
+
     <div class="div-table">
+
         <div class="tr">
           <div class="tc">Date</div>
-          <div class="tc">Doctor</div>
+          <div class="tc">Name</div>
           <div class="tc">Status</div>
           <div class="tc">Show</div>
           <div class="tc">Edit</div>
           <div class="tc">Delete</div>
         </div>
+        <% @my_apps.each do |apps| %>
         <div class="tr">
-          <% @pat_app.each do |patient_apps| %>
-            <div class="tc"> <%= patient_apps.created_at %></div>
-            <div class="tc"> <%= patient_apps.first_name  %> <%= patient_apps.last_name %></div>
-            <div class="tc"> <%= %></div>
-            <div class="tc"> <%= link_to "Show", '#' %></div>
-            <div class="tc"><%= link_to "Edit", '#' %></div>
-            <div class="tc"><%= link_to "Delete", '#' %></div>
-          <% end %>
+            <div class="tc"> <%= apps.date.to_formatted_s(:long) %></div>
+            <% if current_user.doctor? %>
+              <div class="tc"> <%= apps.patient.first_name  %>
+                               <%= apps.patient.last_name %> ( Patient )
+              </div>
+            <% else %>
+              <div class="tc"> <%= apps.doctor.first_name  %>
+                               <%= apps.doctor.last_name %> ( Doctor )
+              </div>
+            <% end %>
+            <div class="tc"> <%= apps.status %></div>
+            <div class="tc"> <%= link_to "Show", appointment_path(apps) %></div>
+            <div class="tc"><%= link_to "Edit", edit_appointment_path(apps) %></div>
+            <div class="tc">
+              <%= link_to appointment_path(apps) , method: :delete, data: {confirm: "Hey, Are you sure?"} do %>
+                Delete
+              <% end %>
+            </div>
         </div>
+        <% end %>
+
       </div>
-<% end %>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'user_photo' => "appointments#user_photo"
   get 'disease_photo' => "appointments#disease_photo"
+  get 'archives' => "appointments#archives"
 
   root 'users#index'
 

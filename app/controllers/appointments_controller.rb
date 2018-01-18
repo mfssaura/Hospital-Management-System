@@ -16,7 +16,10 @@ class AppointmentsController < ApplicationController
   end
 
   def archives
-    # show past appointment records
+    # show past appointment records which are 10 years older
+    
+    time_range = (Time.now - 10.year)..Time.now
+    @past_appointments = Appointment.all.where(date: time_range).paginate(:page => params[:page], :per_page => 5)
   end
 
   def new

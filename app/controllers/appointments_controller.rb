@@ -3,19 +3,31 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @my_apps = Appointment.where(doctor_id: current_user.id) if current_user.doctor?
-    @my_apps = Appointment.where(patient_id: current_user.id) if current_user.patient?
+    @my_apps = Appointment.where(doctor_id: current_user.id).paginate(:page => params[:page], :per_page => 5) if current_user.doctor?
+    @my_apps = Appointment.where(patient_id: current_user.id).paginate(:page => params[:page], :per_page => 5) if current_user.patient?
+  end
+
+  def user_photo
+    @all_users_pics = User.all.where.not(cover: nil)
+  end
+
+  def disease_photo
+    @all_disease_pics = Appointment.all.where.not(cover: nil)
+  end
+
+  def archives
+    # show past appointment records
   end
 
   def new
     @appointment = Appointment.new
     @note = Note.new
-    @all_doctors = User.doc_list
-    @all_patients = User.pat_list
+
+    @all_doctors = User.doc_list          #Get all doctors
+    @all_patients = User.pat_list         #Get all patients
   end
 
   def create
-
     @appointment = Appointment.create(appointment_params)
     @note = @appointment.notes.create(notes_params)
     @note.user_id = current_user.id
@@ -74,15 +86,11 @@ class AppointmentsController < ApplicationController
   private
 
     def appointment_params
-      params.require(:appointment).permit(:date, :status, :doctor_id, :patient_id)
+      params.require(:appointment).permit(:date, :status, :doctor_id, :patient_id, :cover)
     end
 
     def notes_params
-      params[:appointment].require(:note).permit(:description)
+      params[:appointment].require(:notes).permit(:description)
     end
-
-    # def notes_params
-    #   params.permit(:description, :user_id, :appointment_id)
-    # end
 
 end

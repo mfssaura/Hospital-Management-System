@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hms</title>
+  <title>Hospital Management System</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <%= render "layouts/navigation" %>
+  <body>
 
-    <div class="main-body-left" id="main-div-body">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
+    <div class="page-container">
+      <div class="top-navigation">
+        <%= render "layouts/navigation" %>
+      </div>
+
+      <div class="sidenav">
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <div class="user-images">
+          <%= link_to 'Get all Users', user_photo_path %>
+        </div>
+        <div class="appointment-images">
+          <%= link_to 'Get all Disease Images', disease_photo_path %>
+        </div>
+      </div>
+
+      <div class="main-body">
+        <div><p class="notice"><%= notice %></p></div>
+        <div><p class="alert"><%= alert %></p></div>
+        <%= yield %>
+      </div>
     </div>
 
-
-</body>
+  </body>
 </html>

@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
-  get 'users/index'
 
-  get 'users/show'
 
-  devise_for :users , controllers: {registrations: "registrations"}
+  get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
+
+  devise_for :users , controllers: {
+    registrations: "registrations"
+  }
 
   resources :users
 
   resources :appointments do
     resources :notes
   end
+
+  get 'user_photo' => "appointments#user_photo"
+  get 'disease_photo' => "appointments#disease_photo"
 
   root 'users#index'
 

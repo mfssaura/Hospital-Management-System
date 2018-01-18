@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+  <div class="div-table">
+    <div class="tr">
+      <div class="tc"><u><b>Image</b></u></div>
+      <div class="tc"><u><b>Name</b></u></div>
+    </div>
+    <% @all_users_pics.each do |user| %>
+    <div class="tr">
+        <div class="tc"><%= image_tag (user.cover.url) if user.cover? %></div>
+        <div class="tc"><%= user.first_name %></div>
+    </div>
+    <% end %>
+  </div>
+</body>
+</html>

@@ -21,9 +21,18 @@
   </div>
 
   <div class="field">
-    <%= f.fields_for :note do |field| %>
+    <%= f.fields_for :notes do |field| %>
         <%= field.label "Cause" %><br>
         <%= field.text_area :description %>
+    <% end %>
+  </div>
+
+  <div class="image-field">
+    <% if current_user.patient? %>
+      <div class="field">
+        <%= f.label :Upload_Image %>
+        <%= f.file_field :cover %>
+      </div>
     <% end %>
   </div>
 

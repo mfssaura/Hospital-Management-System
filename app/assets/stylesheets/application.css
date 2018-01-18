@@ -13,3 +13,84 @@
  *= require_tree .
  *= require_self
  */
+ .sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main-body {
+    position: absolute;
+    left: 200px;
+    width: 55%;
+    margin: 5px;
+}
+
+.page-container {
+  width: 100%;
+}
+
+ nav {
+     position: relative;
+     top: 0;
+     left: 190px;
+     right: 0;
+     border: 2px solid black;
+     height: 40px;
+     background-color: #dcf8d3;
+     width: 85%;
+ }
+
+ li {
+     float: left;
+     padding-right: 40px;
+     list-style: none;
+     position: relative;
+     bottom: 4px;
+ }
+
+ .pagination {
+     font-size: 15px;
+ }
+
+ .pagination > * {
+     margin-right: 0.1em;
+     padding: 0.3em 0.4em;
+ }
+
+ .pagination a:hover {
+     background: #202020 none repeat scroll 0 0;
+     text-shadow: 1px 1px 1px #171717;
+ }
+
+ .pagination a:active {
+     text-shadow: none;
+ }
+
+ .pagination .current {
+     background: #202020 none repeat scroll 0 0;
+     color: white;
+     text-shadow: 1px 1px 1px #171717;
+ }
+
+ .pagination .disabled {
+     color: #C0C0C0;
+ }

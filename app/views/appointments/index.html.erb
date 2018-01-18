@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<head>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
-</head>
-<h2>Appointments List</h2>
 
+  <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:800" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <h1 class="text-left">
+      <u>Appointment List</u>
+    </h1>
+
+
+    <div class="field">
+      <h4>Hi, <%= current_user.first_name %> <%= current_user.last_name %></h4>
+    </div>
+
+    <div class="field">
+      <h4>e-mail: <%= current_user.email %></h4>
+    </div>
 
     <div class="image-container">
       <%= image_tag(current_user.cover.url) if current_user.cover? %>
-    </div>
-
-
-    <div class="field">
-      <h4>Logged In As:</h4>
-      <%= current_user.first_name %>
-    </div>
-
-    <div class="field">
-      <h4>e-mail</h4>
-      <%= current_user.email %>
-    </div>
-
+    </div><br><br>
 
 
     <div class="div-table">
-
         <div class="tr">
-          <div class="tc">Date</div>
-          <div class="tc">Name</div>
-          <div class="tc">Status</div>
-          <div class="tc">Show</div>
-          <div class="tc">Edit</div>
-          <div class="tc">Delete</div>
+          <div class="tc"><u><b>Date</b></u></div>
+          <div class="tc"><u><b>Name</b></u></div>
+          <div class="tc"><u><b>Status</b></u></div>
+          <div class="tc"><u><b>Show</b></u></div>
+          <div class="tc"><u><b>Edit</b></u></div>
+          <div class="tc"><u><b>Delete</b></u></div>
         </div>
         <% @my_apps.each do |apps| %>
         <div class="tr">
@@ -54,5 +56,11 @@
             </div>
         </div>
         <% end %>
-
       </div>
+
+      <div class="paginate-field">
+        <%= will_paginate @my_apps  %>
+      </div>
+
+  </body>
+</html>

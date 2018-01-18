@@ -1,3 +1,8 @@
+
+<div class="button">
+    <%= link_to "Back To My Home", appointments_path %>
+</div><br>
+
 <div class="field">
   <div><h3>Appointment Date: </h3>
     <%= @appointment.date.to_formatted_s(:long) %>
@@ -10,8 +15,15 @@
   </div>
 </div>
 
+<% if current_user.patient? %>
+  <div class="image-field">
+      <div><strong><h4>Appointment Image:</h4></strong></div>
+      <%= image_tag (@appointment.cover.url) if @appointment.cover? %>
+  </div>
+<% end %>
+
 <div class="field">
-  <h3>My Notes:</h3>
+  <h3><u>All Notes:</u></h3>
   <% @my_notes.each do |n| %>
     <div class="field">
       <div><h5>Description: </h5>
@@ -21,7 +33,3 @@
   <% end %>
 </div>
 <br>
-
-<div class="button">
-    <%= link_to "Back to home", appointments_path %>
-</div>

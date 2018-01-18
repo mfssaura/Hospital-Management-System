@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+  <div class="div-table">
+    <div class="tr">
+      <div class="tc"><u><b>Image</b></u></div>
+      <div class="tc"><u><b>Date of Appointment</b></u></div>
+      <div class="tc"><u><b>Doctor Name</b></u></div>
+      <div class="tc"><u><b>Patient Name</b></u></div>
+    </div>
+    <% @all_disease_pics.each do |app| %>
+    <div class="tr">
+        <div class="tc"><%= image_tag (app.cover.url) if app.cover? %></div>
+        <div class="tc"><%= app.date.to_formatted_s(:long) %></div>
+        <div class="tc"><%= app.doctor.first_name %> <%= app.doctor.last_name %></div>
+        <div class="tc"><%= app.patient.first_name %></div>
+    </div>
+    <% end %>
+  </div>
+</body>
+</html>
